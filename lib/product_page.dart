@@ -1,3 +1,4 @@
+import 'package:atomic_widgets_example/common_widgets/my_elevated_button.dart';
 import 'package:atomic_widgets_example/features/product/data/repositories/product_repository.dart';
 import 'package:atomic_widgets_example/features/product/presentation/cubit/product_cubit.dart';
 import 'package:atomic_widgets_example/features/product/presentation/widgets/product_card.dart';
@@ -58,6 +59,25 @@ class _Body extends StatelessWidget {
                 );
               }
             },
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: MyElevatedButton(
+              onPressed:
+                  context.watch<ProductCubit>().state.status == Status.loading
+                      ? null
+                      : () {
+                          context.read<ProductCubit>().getProduct();
+                        },
+              child:
+                  context.watch<ProductCubit>().state.status == Status.loading
+                      ? const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.white,
+                          ),
+                        )
+                      : const Text('Get Product'),
+            ),
           ),
         ],
       ),
