@@ -79,6 +79,18 @@ class _Body extends StatelessWidget {
                       : const Text('Get Product'),
             ),
           ),
+          /* const SizedBox(
+            height: 10,
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: MyElevatedButtonStf(
+              child: const Text('Get Product'),
+              onPressed: () async {
+                await context.read<ProductCubit>().getProduct();
+              },
+            ),
+          ) */
         ],
       ),
     );
