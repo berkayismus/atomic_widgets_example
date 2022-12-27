@@ -47,28 +47,32 @@ class _BodyState extends State<_Body> {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          BlocBuilder<ProductCubit, ProductState>(
-            builder: (context, state) {
-              if (state.status == Status.initial) {
-                return const SizedBox.shrink();
-              } else if (state.status == Status.loading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state.status == Status.loaded) {
-                return ProductCard(
-                  product: state.product!,
-                );
-              } else {
-                return const Center(
-                  child: Text('Bir hata meydana geldi'),
-                );
-              }
-            },
-          ),
+          _buildProductCard(),
           _buildGetProductButton(),
         ],
       ),
+    );
+  }
+
+  Widget _buildProductCard() {
+    return BlocBuilder<ProductCubit, ProductState>(
+      builder: (context, state) {
+        if (state.status == Status.initial) {
+          return const SizedBox.shrink();
+        } else if (state.status == Status.loading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state.status == Status.loaded) {
+          return ProductCard(
+            product: state.product!,
+          );
+        } else {
+          return const Center(
+            child: Text('Bir hata meydana geldi'),
+          );
+        }
+      },
     );
   }
 
