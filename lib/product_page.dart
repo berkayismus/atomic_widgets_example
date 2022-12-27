@@ -33,9 +33,14 @@ class ProductPage extends StatelessWidget {
   }
 }
 
-class _Body extends StatelessWidget {
+class _Body extends StatefulWidget {
   const _Body();
 
+  @override
+  State<_Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<_Body> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -61,26 +66,30 @@ class _Body extends StatelessWidget {
               }
             },
           ),
-          SizedBox(
-            width: double.infinity,
-            child: MyElevatedButton(
-              onPressed:
-                  context.watch<ProductCubit>().state.status == Status.loading
-                      ? null
-                      : () {
-                          context.read<ProductCubit>().getProduct();
-                        },
-              child:
-                  context.watch<ProductCubit>().state.status == Status.loading
-                      ? const Center(
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
-                        )
-                      : const Text('Get Product'),
-            ),
-          ),
+          _buildGetProductButton(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildGetProductButton() {
+    final isLoading =
+        context.watch<ProductCubit>().state.status == Status.loading;
+    return SizedBox(
+      width: double.infinity,
+      child: MyElevatedButton(
+        onPressed: isLoading
+            ? null
+            : () {
+                context.read<ProductCubit>().getProduct();
+              },
+        child: isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
+              )
+            : const Text('Get Product'),
       ),
     );
   }
