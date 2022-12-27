@@ -11,10 +11,11 @@ class ProductPageWrapperProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => ProductCubit(
-              productRepository: ProductRepository(),
-            )..getProduct(),
-        child: const ProductPage());
+      create: (context) => ProductCubit(
+        productRepository: ProductRepository(),
+      )..getProduct(),
+      child: const ProductPage(),
+    );
   }
 }
 
@@ -79,9 +80,6 @@ class _Body extends StatelessWidget {
                       : const Text('Get Product'),
             ),
           ),
-          const Center(
-            child: CircularProgressIndicator(),
-          )
         ],
       ),
     );
