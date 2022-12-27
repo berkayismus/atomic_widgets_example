@@ -81,6 +81,7 @@ class _BodyState extends State<_Body> {
         context.watch<ProductCubit>().state.status == Status.loading;
     return SizedBox(
       width: double.infinity,
+      // TODO: 6 - MyElevatedButton widgetını MyElevatedButtonStf ile değiştirip, aşağıdaki şekilde kullanın
       child: MyElevatedButton(
         onPressed: isLoading
             ? null
